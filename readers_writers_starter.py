@@ -55,7 +55,14 @@ class ReadersWritersMonitor:
         """
         with self.condition:
             # TODO: Replace 'pass' with your logic
-            pass
+
+            #wait if the weiter is writing and the condition ensure readers won't strave writers
+            while self.active_writers>0 or self.waiting_writers>0:
+                print(f"reader {reader_id} is waiting to read")
+                self.condition.wait()
+            # Safe to read now
+            self.active_readers += 1
+            print(f"Reader {reader_id} starts reading. Active readers = {self.active_readers}")
 
     def end_read(self, reader_id: int) -> None:
         """
