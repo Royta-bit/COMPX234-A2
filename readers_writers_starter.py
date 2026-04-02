@@ -197,13 +197,15 @@ def main() -> None:
     all_threads = readers + writers
     
     # TODO: Start all threads
-
-    
+    print("---------------------Starting simulation(3readers 2writers)--------------")
+    for thread in all_threads:
+        thread.start()
     # TODO: Wait for all threads to finish
-
+    for thread in all_threads:
+        thread.join()
 
     # TODO: Print final message that simulation completed
-
+    print("----------------------Finish Simluiation---------------------------------")
 
 if __name__ == "__main__":
     main()
