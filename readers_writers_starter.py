@@ -118,7 +118,11 @@ class ReadersWritersMonitor:
         """
         with self.condition:
             # TODO: Replace 'pass' with your logic
-            pass
+            self.active_writers=0
+            print(f"Writer {writer_id} stops writing.Active writers={self.active_writers}")
+            #wake up the waiting threads check the conditions of readers and writers
+            print("Writer finished . Waking all waiting threads")
+            self.condition.notify_all()
 
 # Donot Change this
 class Reader(threading.Thread):
